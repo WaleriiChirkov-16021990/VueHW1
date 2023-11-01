@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Часть 2. Задание по Vue-->
+
+<!--1. Создать кнопку "Перевернуть". При клике на кнопку текст кнопки должен перевернуться и отобразиться в обратном порядке.-->
+<!--2. Есть список элементов. Пользователь может добавлять новые элементы списка с текстом “Новый элемент списка” нажав на кнопку "Добавить".-->
+<!--3. *Дополнительное задание: При клике на элемент списка он должен быть удален. (по желанию)-->
+<div id="app">
+    <button @click="reverse">{{ button }}</button>
+    <ul v-for="(item,index) in dataList" v-bind:key="item.id">
+        <li @click="deleteItem(index)">
+            <p>{{ item.id }}</p>
+            <p>Name : {{ item.name }}</p>
+            <img src="{{item.img}}" alt="img.item">
+        </li>
+    </ul>
+    <button @click="addProduct">{{ addButton }}</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            button: 'Перевернуть',
+            dataList:
+                [
+                    {
+                        id: '1',
+                        name:
+                            'product1',
+                        img:
+                            'https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663665472_56-mykaleidoscope-ru-p-kolbasa-s-sirom-yeda-vkontakte-61.jpg',
+                    },
+                    {
+                        id: '2',
+                        name:
+                            'product2',
+                        img:
+                            'https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663665472_56-mykaleidoscope-ru-p-kolbasa-s-sirom-yeda-vkontakte-61.jpg',
+                    },
+                    {
+                        id: '3',
+                        name:
+                            'product3',
+                        img:
+                            'https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663665472_56-mykaleidoscope-ru-p-kolbasa-s-sirom-yeda-vkontakte-61.jpg',
+                    },
+                ],
+            addButton: 'Add Product',
+
+        }
+
+        ,
+        methods: {
+            reverse: function () {
+                this.button = this.button.split('').reverse().join('');
+            }
+            ,
+            addProduct() {
+                this.dataList.push({
+                    id: `${this.dataList.length + 1}`,
+                    name: `product${this.dataList.length + 1}`,
+                    img: `https://cf3.ppt-online.org/files3/slide/g/gelMFskHXPqhcuJaNBTnR9EfWj48x073C2iQI5/slide-18.jpg`
+                })
+            },
+            deleteItem(index) {
+                this.dataList.splice(index, 1);
+            },
+        }
+        ,
+    })
+</script>
+</body>
+</html>
